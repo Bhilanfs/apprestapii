@@ -1,8 +1,8 @@
 var connection = require('../koneksi');
 var mysql = require('mysql');
 var md5 = require('MD5');
-var response = requrie('../res');
-var jwt = require('jsonwetoken');
+var response = require('../res');
+var jwt = require('jsonwebtoken');
 var config = require('../config/secret');
 var ip = require('ip');
 
@@ -16,7 +16,7 @@ exports.registrasi = function (req, res) {
         tanggal_daftar: new Date()
     }
 
-    var query = "SELECT email FROM ?? WHERE ??";
+    var query = "SELECT email FROM ?? WHERE ??=?";
     var table = ["user", "email", post.email];
 
     query = mysql.format(query, table);
@@ -36,7 +36,7 @@ exports.registrasi = function (req, res) {
                     }
                 });
             }else {
-                response.ok("Email sudah terdaftar!");
+                response.ok("Email sudah terdaftar!",res);
             }
         };
 
