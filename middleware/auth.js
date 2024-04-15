@@ -44,7 +44,7 @@ exports.registrasi = function (req, res) {
 };
 
 
-// controller untuk login
+//controller untuk login
 exports.login = function (req, res) {
     var post = {
         password: req.body.password,
@@ -63,7 +63,7 @@ exports.login = function (req, res) {
                 var token = jwt.sign({ rows }, config.secret, {
                     expiresIn: 1440
                 });
-                id_user(0).id;
+                id_user = rows(0).id;
 
                 var data = {
                     id_user: id_user,
@@ -78,7 +78,7 @@ exports.login = function (req, res) {
                 connection.query(query, data, function (error, rows) {
                     if (error) {
                         console.log(error);
-                    }else {
+                    } else {
                         res.json({
                             success: true,
                             message: 'Token JWT tergenerate!',
@@ -87,8 +87,8 @@ exports.login = function (req, res) {
                         });
                     }
                 });
-            }else {
-                res.json({"Error": true, "Message":"Email atau password salah!"});
+            } else {
+                res.json({ "Error": true, "Message": "Email atau password salah!" });
             }
         }
     });
